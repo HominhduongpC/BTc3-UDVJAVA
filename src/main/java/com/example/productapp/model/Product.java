@@ -12,6 +12,9 @@ public class Product {
     @Min(value = 1, message = "Giá phải lớn hơn 0")
     private double price;
 
+    // Đường dẫn ảnh của sản phẩm (URL)
+    private String imageUrl;
+
     public Product() {}
 
     public Product(int id, String name, double price) {
@@ -42,5 +45,13 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

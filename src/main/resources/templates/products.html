@@ -19,6 +19,7 @@
 <table border="1" style="margin-top:10px;">
     <tr>
         <th>ID</th>
+        <th>Ảnh</th>
         <th>Tên</th>
         <th>Giá</th>
         <th>Chi tiết</th>
@@ -26,6 +27,11 @@
     </tr>
     <tr th:each="product : ${products}">
         <td th:text="${product.id}"></td>
+        <td>
+            <img th:if="${product.imageUrl != null and !product.imageUrl.isBlank()}"
+                 th:src="${product.imageUrl}" alt="Ảnh sản phẩm" width="60">
+            <span th:unless="${product.imageUrl != null and !product.imageUrl.isBlank()}">(chưa có ảnh)</span>
+        </td>
         <td th:text="${product.name}"></td>
         <td th:text="${#numbers.formatInteger(product.price, 0, 'POINT')} + ' ₫'"></td>
         <td>
@@ -37,7 +43,7 @@
         </td>
     </tr>
     <tr th:if="${#lists.isEmpty(products)}">
-        <td colspan="5">Không có sản phẩm nào.</td>
+        <td colspan="6">Không có sản phẩm nào.</td>
     </tr>
 </table>
 </body>

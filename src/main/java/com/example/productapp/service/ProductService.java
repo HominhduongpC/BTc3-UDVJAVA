@@ -44,6 +44,16 @@ public class ProductService {
         products.removeIf(p -> p.getId() == id);
     }
 
+    // Thêm / cập nhật ảnh cho 1 sản phẩm, trả về sản phẩm sau khi cập nhật
+    // (null nếu không tìm thấy sản phẩm)
+    public Product updateImage(int id, String imageUrl) {
+        Product product = findById(id);
+        if (product != null) {
+            product.setImageUrl(imageUrl);
+        }
+        return product;
+    }
+
     // Tìm kiếm sản phẩm theo tên (không phân biệt hoa thường)
     public List<Product> searchByName(String keyword) {
         if (keyword == null || keyword.isBlank()) {
