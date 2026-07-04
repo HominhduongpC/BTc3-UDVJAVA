@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách sản phẩm</title>
+</head>
+<body>
+<h1>Danh sách sản phẩm</h1>
+
+<a href="/products/add">Thêm sản phẩm</a>
+
+<!-- Tìm kiếm theo tên -->
+<form th:action="@{/products}" method="get" style="margin-top:10px;">
+    <input type="text" name="keyword" th:value="${keyword}" placeholder="Tìm theo tên...">
+    <button type="submit">Tìm kiếm</button>
+    <a href="/products">Xóa lọc</a>
+</form>
+
+<table border="1" style="margin-top:10px;">
+    <tr>
+        <th>ID</th>
+        <th>Tên</th>
+        <th>Giá</th>
+        <th>Chi tiết</th>
+        <th>Xóa</th>
+    </tr>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${#numbers.formatInteger(product.price, 0, 'POINT')} + ' ₫'"></td>
+        <td>
+            <a th:href="@{/products/{id}(id=${product.id})}">Xem</a>
+        </td>
+        <td>
+            <a th:href="@{/products/delete/{id}(id=${product.id})}"
+               onclick="return confirm('Xóa sản phẩm này?');">Xóa</a>
+        </td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(products)}">
+        <td colspan="5">Không có sản phẩm nào.</td>
+    </tr>
+</table>
+</body>
+</html>
